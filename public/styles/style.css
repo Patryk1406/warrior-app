@@ -21,7 +21,7 @@ h1.title {
     text-transform: uppercase;
 }
 
-/*register.hbs*/
+/*warriors/register.hbs*/
 
 form {
     margin-top: 20px;
@@ -81,7 +81,7 @@ div.exit {
     cursor: pointer;
 }
 
-/*thanks.hbs*/
+/*warriors/thanks.hbs*/
 
 div.what-next {
     margin-top: 20px;
@@ -107,4 +107,53 @@ div.what-next a {
 
 div.what-next a:hover {
     opacity: 65%;
+}
+
+/*hallOfGlory/main.hbs*/
+
+table.warriors {
+    margin: 20px auto;
+}
+
+table.warriors th, table.warriors td {
+    border: 2px black solid;
+    padding: 5px;
+    text-align: center;
+}
+
+table.warriors th{
+    text-transform: uppercase;
+    background-color: firebrick;
+}
+
+table.warriors td {
+    background-color: seagreen;
+}
+
+/*partials/nav.hbs*/
+div.nav {
+    display: flex;
+    width: 50vw;
+    height: 80px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.nav>a {
+    height: 50px;
+    margin-top: 20px;
+    border: 2px black solid;
+    padding: 5px 10px;
+    background-color: darkred;
+    line-height: 40px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+div.nav>a:hover {
+    opacity: 80%;
 }

@@ -4,6 +4,8 @@ import {helpers} from "./utils/helpers";
 import * as methodOverride from 'method-override';
 import {homeRouter} from "./routes/home";
 import {warriorsRouter} from "./routes/warriorsRouter";
+import {hallOfGloryRouter} from "./routes/hallOfGloryRouter";
+import './database/db';
 
 const app = express();
 
@@ -21,6 +23,7 @@ app.use(methodOverride());
 
 app.use('', homeRouter);
 app.use('/warriors', warriorsRouter)
+app.use('/hall-of-glory', hallOfGloryRouter)
 
 
 app.listen(3000, '127.0.0.1', () => {

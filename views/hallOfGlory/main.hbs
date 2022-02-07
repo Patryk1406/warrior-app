@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="title-wrapper">
+        <h1 class="title">Hall of glory!!</h1>
+    </div>
+    <table class="warriors">
+        <thead>
+        <tr>
+        <th>Name</th>
+        <th>The number of victories</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each warriors}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.victoriesCount}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    {{> nav}}
+</div>

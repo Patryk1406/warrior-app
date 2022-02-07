@@ -1,7 +1,8 @@
 import {Request, Response} from "express";
 import {Warrior} from "../types/warrior";
+import {WarriorRecord} from "../records/warriorRecord";
 
-export function gettingWarriorFromRequest(req: Request, res: Response): Warrior | undefined {
+export async function gettingWarriorFromRequest(req: Request, res: Response): Promise<Warrior | undefined> {
     const name = String(req.body.name);
     const strength = Number(req.body.strength);
     const defence = Number(req.body.defence);
@@ -14,6 +15,13 @@ export function gettingWarriorFromRequest(req: Request, res: Response): Warrior 
             warrior
         });
         return;
+    }
+    if ((await WarriorRecord.getAllWarriorsNames()).includes(name)) {
+        res.render('warriors/register', {
+            message: 'A warrior with the name given by you already exists!',
+            warrior
+        });
+        return
     }
     if (strength < 1 || defence < 1 || stamina < 1 || agility < 1) {
         res.render('warriors/register', {

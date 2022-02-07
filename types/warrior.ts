@@ -1,5 +1,3 @@
-
-
 export interface Warrior {
     name: string;
     strength: number;

@@ -1,15 +1,15 @@
-import * as express from 'express';
+import {Router} from "express";
 import {gettingWarriorFromRequest} from "../utils/gettingWarriorFromRequest";
 import {Warrior} from "../types/warrior";
 import {WarriorRecord} from "../records/warriorRecord";
 
-export const warriorsRouter = express.Router();
+export const warriorsRouter = Router();
 
 warriorsRouter.get('/', (req, res) => {
     res.render('warriors/register');
 })
     .post('/', async (req, res) => {
-        const warrior = gettingWarriorFromRequest(req, res);
+        const warrior = await gettingWarriorFromRequest(req, res);
         if (!warrior) {
             return
         }
