@@ -1,5 +1,4 @@
 import {Collection, ObjectId, WithId} from 'mongodb';
-import {v4 as uuid} from 'uuid';
 import {Warrior} from "../types/warrior";
 import {db} from "../database/db";
 
@@ -14,7 +13,7 @@ export class WarriorRecord implements Warrior {
                 private readonly _strength: number,
                 private readonly _defence: number,
                 id?: ObjectId) {
-        this.id = id ? new ObjectId(id) : new ObjectId(uuid());
+        this.id = id ?? new ObjectId();
     }
 
     get agility(): number {
@@ -46,5 +45,17 @@ export class WarriorRecord implements Warrior {
     static async getOne(id: ObjectId) {
         const warrior = await collection.find({_id: id}).next();
         return new WarriorRecord(warrior.agility, warrior.name, warrior.stamina, warrior.strength, warrior.defence, warrior._id);
+    }
+
+    async insert(): Promise<ObjectId> {
+        await collection.insertOne({
+            _id: this.id,
+            name: this._name,
+            agility: this._agility,
+            stamina: this._stamina,
+            strength: this._strength,
+            defence: this._defence,
+        })
+        return this.id;
     }
 }

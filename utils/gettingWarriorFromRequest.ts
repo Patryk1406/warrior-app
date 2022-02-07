@@ -2,11 +2,11 @@ import {Request, Response} from "express";
 import {Warrior} from "../types/warrior";
 
 export function gettingWarriorFromRequest(req: Request, res: Response): Warrior | undefined {
-    const name: string = req.body.name;
+    const name = String(req.body.name);
     const strength = Number(req.body.strength);
     const defence = Number(req.body.defence);
     const stamina = Number(req.body.stamina);
-    const agility = Number(req.body.stamina);
+    const agility = Number(req.body.agility);
     const warrior: Warrior = {name, strength, defence, stamina, agility};
     if (name.length <= 2 || name.length >= 25) {
         res.render('warriors/register', {
@@ -22,7 +22,7 @@ export function gettingWarriorFromRequest(req: Request, res: Response): Warrior 
         });
         return;
     }
-    if (strength+defence+stamina+agility !== 10) {
+    if (strength + defence + stamina + agility !== 10) {
         res.render('warriors/register', {
             message: 'The combined value of your warrior\'s traits has to equal to 10!',
             warrior

@@ -21,6 +21,8 @@ h1.title {
     text-transform: uppercase;
 }
 
+/*register.hbs*/
+
 form {
     margin-top: 20px;
     display: flex;
@@ -77,4 +79,32 @@ div.exit {
     line-height: 25px;
     text-align: center;
     cursor: pointer;
+}
+
+/*thanks.hbs*/
+
+div.what-next {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: darkslategray;
+    text-align: center;
+}
+
+div.what-next p {
+    padding: 5px;
+    margin: 5px;
+}
+
+div.what-next a {
+    border: 2px black solid;
+    padding: 5px;
+    background-color: lightgreen;
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+div.what-next a:hover {
+    opacity: 65%;
 }
