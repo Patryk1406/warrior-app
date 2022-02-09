@@ -5,6 +5,7 @@ import * as methodOverride from 'method-override';
 import {homeRouter} from "./routes/home";
 import {warriorsRouter} from "./routes/warriorsRouter";
 import {hallOfGloryRouter} from "./routes/hallOfGloryRouter";
+import {arenaRouter} from "./routes/arenaRouter";
 import './database/db';
 
 const app = express();
@@ -18,14 +19,15 @@ app.set('view engine', '.hbs');
 app.use(express.static('./public'));
 app.use(express.urlencoded({
     extended: false,
-}))
+}));
 app.use(methodOverride());
 
 app.use('', homeRouter);
-app.use('/warriors', warriorsRouter)
-app.use('/hall-of-glory', hallOfGloryRouter)
+app.use('/warriors', warriorsRouter);
+app.use('/hall-of-glory', hallOfGloryRouter);
+app.use('/arena', arenaRouter);
 
 
 app.listen(3000, '127.0.0.1', () => {
     console.log('The app is listening on http://localhost:3000');
-})
+});

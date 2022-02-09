@@ -5,8 +5,11 @@ import {db} from "../database/db";
 const collection = db.collection('warriors');
 
 export class WarriorRecord {
-    private _victoriesCount: number = 0
+    private _victoriesCount: number = 0;
+
     private readonly _id: ObjectId
+    private _hp: number;
+    private _shield: number
     constructor(private readonly _agility: number,
                 private readonly _name: string,
                 private readonly _stamina: number,
@@ -14,6 +17,8 @@ export class WarriorRecord {
                 private readonly _defence: number,
                 id?: ObjectId) {
         this._id = id ?? new ObjectId();
+        this._hp = this.stamina * 10;
+        this._shield = this.defence
     }
     get id(): ObjectId {
         return this._id;
@@ -43,8 +48,24 @@ export class WarriorRecord {
         return this._victoriesCount;
     }
 
+    get hp(): number {
+        return this._hp;
+    }
+
+    get shield(): number {
+        return this._shield;
+    }
+
     set victoriesCount(value: number) {
         this._victoriesCount = value;
+    }
+
+    set hp(value: number) {
+        this._hp = value;
+    }
+
+    set shield(value: number) {
+        this._shield = value;
     }
 
     static async getAll(): Promise<WarriorRecord[]> {
