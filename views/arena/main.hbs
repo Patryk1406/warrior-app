@@ -1,0 +1,25 @@
+<div class="wrapper">
+    {{>title title='arena'}}
+    <form action="/arena/fight" method="POST" class="fight-form">
+        <fieldset>
+        <label for="firstWarriorId">Chose the first warrior</label>
+        <select name="firstWarriorId" id="firstWarriorId">
+            {{#each warriors}}
+                <option value="{{this._id}}">{{this._name}}</option>
+            {{/each}}
+        </select>
+        </fieldset>
+        <fieldset>
+        <label for="secondWarriorId">Chose the opponent for the first warrior</label>
+        <select name="secondWarriorId" id="secondWarriorId">
+            {{#each warriors}}
+                <option value="{{this._id}}"{{#if @last}} selected{{/if}}{{#if @first}} disabled{{/if}}>{{this._name}}</option>
+            {{/each}}
+        </select>
+        </fieldset>
+        <button type="submit">Let's start the fight</button>
+    </form>
+    {{> nav}}
+</div>
+{{> error-view}}
+<script src="/scripts/arena-main.js"></script>

@@ -1,7 +1,7 @@
 import {WarriorRecord} from "../records/warriorRecord";
 
 export class Arena {
-    private _description: string;
+    private _description: string[] = [];
     private _attacker: WarriorRecord;
     private _defender: WarriorRecord;
 
@@ -18,7 +18,7 @@ export class Arena {
         return this._warrior2;
     }
 
-    get description(): string {
+    get description(): string[] {
         return this._description;
     }
 
@@ -30,7 +30,7 @@ export class Arena {
         return this._attacker;
     }
 
-    set description(value: string) {
+    set description(value: string[]) {
         this._description = value;
     }
 
@@ -43,17 +43,17 @@ export class Arena {
     }
 
     descriptionUpdate(message: string): void {
-        this.description = this.description ? this.description + '\n' + message : message;
+        this.description.push(message)
     }
 
-     async fight(): Promise<string> {
-        const duckMessage = `The warrior ${this.defender.name} has ducked but before... the competitor has managed to hurt him slightly!`
+     async fight(): Promise<string[]> {
+        const duckMessage = `The warrior ${this.defender.name} has ducked but before... the competitor has managed to hurt him slightly`
         const shieldMessage = `The warrior ${this.defender.name} got hit but he has managed to cover himself with the shield so only it is a little bit broken..`;
 
         if (this.defender.shield + this.defender.agility <= this.attacker.strength) {
             if (this.defender.shield < this.attacker.strength) {
                 const difference = this.attacker.strength - this.defender.shield;
-                const hitMessage = `The warrior ${this.defender.name} got hit and the blow took him ${difference} hp!`
+                const hitMessage = `The warrior ${this.defender.name} got hit and the blow took him ${difference} hp`
                 this.defender.shield = 0;
                 this.defender.hp -= difference;
                 this.descriptionUpdate(hitMessage);
@@ -75,18 +75,14 @@ export class Arena {
         }
          this.attacker = this.defender;
          this.defender =  this.attacker === this.warrior1 ? this.warrior2 : this.warrior1;
-         await this.fight();
+         return this.fight();
     }
 
-    async victory(): Promise<string> {
-        this.description += `\nThe warrior ${this.defender.name} has died and thee winner is ${this.attacker.name}!`;
+    async victory(): Promise<string[]> {
+        this.descriptionUpdate(`The warrior ${this.defender.name} has died and the winner is ${this.attacker.name}`);
         this.attacker.victoriesCount += 1;
-        await this.attacker.insert();
+        await this.attacker.update();
         return this.description;
     }
 
 }
-
-const arena= new Arena(new WarriorRecord(2, 'Jan', 3, 3, 2), new WarriorRecord(1, 'Wiesław', 3, 3, 3));
-// console.log(arena.description)
-arena.fight();

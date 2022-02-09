@@ -16,5 +16,5 @@ warriorsRouter.get('/', (req, res) => {
         const {name, agility, stamina, strength, defence}: Warrior = warrior;
         const warriorRecord = new WarriorRecord(agility, name, stamina, strength, defence);
         await warriorRecord.insert();
-        res.render('warriors/thanks');
+        res.status(201).render('warriors/thanks');
     })

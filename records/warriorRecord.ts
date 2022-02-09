@@ -1,12 +1,13 @@
-import { ObjectId, WithId} from 'mongodb';
+import {ObjectId, WithId} from 'mongodb';
 import {db} from "../database/db";
+import {InvalidDataError} from "../utils/error";
+import { WarriorToDatabase} from "../types/warrior";
 
 
 const collection = db.collection('warriors');
 
 export class WarriorRecord {
-    private _victoriesCount: number = 0;
-
+    private _victoriesCount: number;
     private readonly _id: ObjectId
     private _hp: number;
     private _shield: number
@@ -15,8 +16,11 @@ export class WarriorRecord {
                 private readonly _stamina: number,
                 private readonly _strength: number,
                 private readonly _defence: number,
-                id?: ObjectId) {
+                id?: ObjectId,
+                victoriesCount?: number,
+                ) {
         this._id = id ?? new ObjectId();
+        this._victoriesCount = victoriesCount ?? 0;
         this._hp = this.stamina * 10;
         this._shield = this.defence
     }
@@ -70,13 +74,16 @@ export class WarriorRecord {
 
     static async getAll(): Promise<WarriorRecord[]> {
        const warriors = (await collection.find().toArray()) as WithId<WarriorRecord>[];
-       console.log(warriors);
-       return warriors.map(warrior => new WarriorRecord(warrior.agility, warrior.name, warrior.stamina, warrior.strength, warrior.defence, warrior._id));
+       return warriors.map(warrior => new WarriorRecord(warrior.agility, warrior.name, warrior.stamina, warrior.strength, warrior.defence, warrior._id, warrior.victoriesCount));
     }
 
-    static async getOne(id: ObjectId): Promise<WarriorRecord> {
-        const warrior = await collection.find({_id: id}).next() as WithId<WarriorRecord>;
-        return new WarriorRecord(warrior.agility, warrior.name, warrior.stamina, warrior.strength, warrior.defence, warrior._id);
+    static async getOne(id: string): Promise<WarriorRecord> {
+        const objectId = new ObjectId(id);
+        const warrior = await collection.find({_id: objectId}).next() as WithId<WarriorRecord> | null;
+        if (!warrior) {
+            throw new InvalidDataError('Error, a warrior with the given id doesn\'t exist')
+        }
+        return new WarriorRecord(warrior.agility, warrior.name, warrior.stamina, warrior.strength, warrior.defence, warrior._id, warrior.victoriesCount);
     }
 
     static async getTopTenWarriors(): Promise<{name: string, victoriesCount: number}[]> {
@@ -107,9 +114,16 @@ export class WarriorRecord {
             strength: this.strength,
             defence: this.defence,
             victoriesCount: this.victoriesCount
+        } as WarriorToDatabase)
+        return this.id;
+    }
+
+    async update(): Promise<ObjectId> {
+        await collection.updateOne({_id: this.id}, {
+            $set: {
+                victoriesCount: Number(this.victoriesCount),
+            },
         })
         return this.id;
     }
 }
-
-WarriorRecord.getTopTenWarriors();
