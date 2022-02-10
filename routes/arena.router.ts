@@ -9,7 +9,7 @@ export const arenaRouter = Router();
 arenaRouter
     .get('/', async (req, res) => {
         const warriors = await WarriorRecord.getAll();
-        res.render('arena/main-arena', {
+        res.render('arena/arena-form', {
             warriors
         });
 })
@@ -18,7 +18,7 @@ arenaRouter
         const {firstWarriorId, secondWarriorId} = req.body;
         if (firstWarriorId === secondWarriorId) {
             const warriors = await WarriorRecord.getAll()
-            res.render('arena/main-arena', {
+            res.render('arena/arena-form', {
             warriors,
             message: 'The warrior cannot fight with himself',
         })
