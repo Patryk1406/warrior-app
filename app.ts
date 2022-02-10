@@ -4,9 +4,9 @@ import {engine} from 'express-handlebars';
 import {helpers} from "./utils/helpers";
 import * as methodOverride from 'method-override';
 import {homeRouter} from "./routes/home";
-import {warriorsRouter} from "./routes/warriorsRouter";
-import {hallOfGloryRouter} from "./routes/hallOfGloryRouter";
-import {arenaRouter} from "./routes/arenaRouter";
+import {warriorsRouter} from "./routes/warriors.router";
+import {hallOfGloryRouter} from "./routes/hall-of-glory.router";
+import {arenaRouter} from "./routes/arena.router";
 import {errorHandler} from "./utils/error";
 import './database/db';
 

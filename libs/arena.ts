@@ -1,4 +1,4 @@
-import {WarriorRecord} from "../records/warriorRecord";
+import {WarriorRecord} from "../records/warrior.record";
 
 export class Arena {
     private _description: string[] = [];

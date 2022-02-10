@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {Arena} from "../libs/arena";
-import {WarriorRecord} from "../records/warriorRecord";
+import {WarriorRecord} from "../records/warrior.record";
 
 export const arenaRouter = Router();
 
@@ -28,7 +28,7 @@ arenaRouter
         const secondWarrior = await WarriorRecord.getOne(secondWarriorId);
         const arena = new Arena(firstWarrior, secondWarrior);
         const fightDescription = await arena.fight();
-        res.render('arena/fightResult', {
+        res.render('arena/fight-result', {
             fightDescription,
         })
 })

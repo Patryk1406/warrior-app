@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {Warrior} from "../types/warrior";
-import {WarriorRecord} from "../records/warriorRecord";
+import {WarriorRecord} from "../records/warrior.record";
 
 export async function gettingWarriorFromRequest(req: Request, res: Response): Promise<Warrior | undefined> {
     const name = String(req.body.name);

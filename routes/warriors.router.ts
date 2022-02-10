@@ -1,7 +1,7 @@
 import {Router} from "express";
-import {gettingWarriorFromRequest} from "../utils/gettingWarriorFromRequest";
+import {gettingWarriorFromRequest} from "../utils/getting-warrior-from-request";
 import {Warrior} from "../types/warrior";
-import {WarriorRecord} from "../records/warriorRecord";
+import {WarriorRecord} from "../records/warrior.record";
 
 export const warriorsRouter = Router();
 
