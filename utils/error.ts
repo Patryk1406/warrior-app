@@ -7,7 +7,7 @@ export function errorHandler(err: Error, req: Request, res: Response, next: Next
     let status;
     let message;
     if(err instanceof InvalidDataError) {
-        status = 404;
+        status = 400;
         message = err.message;
     } else {
         status = 500;
