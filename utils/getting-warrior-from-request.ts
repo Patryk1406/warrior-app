@@ -9,9 +9,9 @@ export async function gettingWarriorFromRequest(req: Request, res: Response): Pr
     const stamina = Number(req.body.stamina);
     const agility = Number(req.body.agility);
     const warrior: Warrior = {name, strength, defence, stamina, agility};
-    if (name.length <= 2 || name.length >= 25) {
+    if (name.length < 3 || name.length > 25) {
         res.render('warriors/register', {
-            message: 'The name of your warrior cannot be shorter than 2 chars and longer than 25 chars!',
+            message: 'The name of your warrior cannot be shorter than 3 chars and longer than 25 chars!',
             warrior
         });
         return;
