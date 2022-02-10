@@ -86,11 +86,11 @@ export class WarriorRecord {
         return new WarriorRecord(warrior.agility, warrior.name, warrior.stamina, warrior.strength, warrior.defence, warrior._id, warrior.victoriesCount);
     }
 
-    static async getTopTenWarriors(): Promise<{name: string, victoriesCount: number}[]> {
+    static async getTopWarriors(howManyTop: number): Promise<{name: string, victoriesCount: number}[]> {
         const warriors = await collection.find<{name: string, victoriesCount: number}>({},
             {projection: {_id: 0, name: 1, victoriesCount: 1},
                     sort: {victoriesCount: -1},
-                    limit: 10,
+                    limit: Number(howManyTop),
                     }).toArray();
         return warriors
 
