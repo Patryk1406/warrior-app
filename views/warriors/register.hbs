@@ -1,16 +1,17 @@
 <div class="wrapper">
     {{> title title='Register a new warrior'}}
     <form action="/warriors" method="POST" class="add-warrior">
-        <p>The combined value of the skills of your warrior has to be equal 10</p>
+        <p>The combined value of the skills of your warrior has to be equal 10 and each of them has to be equal one at least. Remaining points to distribute <span id="remaining-points">10</span></p>
         <fieldset class="new-warrior">
             <label>Name: <input type="text" name="name" required{{#if message}} value="{{warrior.name}}"{{/if}}></label>
-            <label>Strength: <input type="number" name="strength" required min="0"{{#if message}} value="{{warrior.strength}}"{{/if}}></label>
-            <label>Defence: <input type="number" name="defence" required min="0"{{#if message}} value="{{warrior.defence}}"{{/if}}></label>
-            <label>Stamina: <input type="number" name="stamina" required min="0"{{#if message}} value="{{warrior.stamina}}"{{/if}}></label>
-            <label>Agility: <input type="number" name="agility" required min="0"{{#if message}} value="{{warrior.agility}}"{{/if}}></label>
+            <label>Strength: <input type="number" name="strength" required min="1" max="7" {{#if message}} value="{{warrior.strength}}"{{/if}}></label>
+            <label>Defence: <input type="number" name="defence" required min="1" max="7" {{#if message}} value="{{warrior.defence}}"{{/if}}></label>
+            <label>Stamina: <input type="number" name="stamina" required min="1" max="7" {{#if message}} value="{{warrior.stamina}}"{{/if}}></label>
+            <label>Agility: <input type="number" name="agility" required min="1" max="7" {{#if message}} value="{{warrior.agility}}"{{/if}}></label>
         </fieldset>
         <button type="submit">Save your warrior</button>
     </form>
     {{> nav}}
 </div>
+<script src="/scripts/register-warrior.js"></script>
 {{> error-view}}

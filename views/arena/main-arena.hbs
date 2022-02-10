@@ -3,15 +3,15 @@
     <form action="/arena/fight" method="POST" class="fight-form">
         <fieldset>
         <label for="firstWarriorId">Chose the first warrior</label>
-        <select name="firstWarriorId" id="firstWarriorId">
+        <select name="firstWarriorId" id="firstWarriorId" required>
             {{#each warriors}}
-                <option value="{{this._id}}">{{this._name}}</option>
+                <option value="{{this._id}}" {{#if @last}} disabled{{/if}}>{{this._name}}</option>
             {{/each}}
         </select>
         </fieldset>
         <fieldset>
         <label for="secondWarriorId">Chose the opponent for the first warrior</label>
-        <select name="secondWarriorId" id="secondWarriorId">
+        <select name="secondWarriorId" id="secondWarriorId" required>
             {{#each warriors}}
                 <option value="{{this._id}}"{{#if @last}} selected{{/if}}{{#if @first}} disabled{{/if}}>{{this._name}}</option>
             {{/each}}
