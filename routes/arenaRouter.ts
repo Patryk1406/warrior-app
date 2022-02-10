@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {Arena} from "../repositories/arena";
+import {Arena} from "../libs/arena";
 import {WarriorRecord} from "../records/warriorRecord";
 import {InvalidDataError} from "../utils/error";
 
