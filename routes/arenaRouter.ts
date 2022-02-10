@@ -1,7 +1,6 @@
 import {Router} from "express";
 import {Arena} from "../libs/arena";
 import {WarriorRecord} from "../records/warriorRecord";
-import {InvalidDataError} from "../utils/error";
 
 export const arenaRouter = Router();
 
@@ -10,7 +9,7 @@ export const arenaRouter = Router();
 arenaRouter
     .get('/', async (req, res) => {
         const warriors = await WarriorRecord.getAll();
-        res.render('arena/main', {
+        res.render('arena/main-arena', {
             warriors
         });
 })
@@ -19,7 +18,7 @@ arenaRouter
         const {firstWarriorId, secondWarriorId} = req.body;
         if (firstWarriorId === secondWarriorId) {
             const warriors = await WarriorRecord.getAll()
-            res.render('arena/main', {
+            res.render('arena/main-arena', {
             warriors,
             message: 'The warrior cannot fight with himself',
         })

@@ -3,5 +3,5 @@ import {Router} from "express";
 export const homeRouter = Router();
 
 homeRouter.get('/', (req, res) => {
-    res.render('home/main.hbs');
+    res.render('home/home.hbs');
 })

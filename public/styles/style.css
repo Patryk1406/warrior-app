@@ -66,6 +66,7 @@ fieldset.new-warrior+button {
 }
 
 /* partials/error-view.hbs*/
+
 div.obscure {
     position: fixed;
     top: 0;
@@ -113,7 +114,6 @@ div.exit {
 div.what-next {
     margin-top: 20px;
     padding: 10px;
-    background-color: darkslategray;
     text-align: center;
 }
 
@@ -125,8 +125,8 @@ div.what-next p {
 div.what-next a {
     border: 2px black solid;
     padding: 5px;
-    background-color: lightgreen;
-    color: black;
+    background-color: darkred;
+    color: white;
     text-transform: uppercase;
     text-decoration: none;
     transition: 0.3s;
@@ -134,9 +134,10 @@ div.what-next a {
 
 div.what-next a:hover {
     opacity: 65%;
+
 }
 
-/*hallOfGlory/main.hbs*/
+/*hallOfGlory/listOWarriors.hbs*/
 
 table.warriors {
     margin: 20px auto;
@@ -159,6 +160,7 @@ table.warriors td {
 }
 
 /*partials/nav.hbs*/
+
 nav.nav {
     display: flex;
     width: 50vw;
@@ -186,7 +188,7 @@ nav.nav>a:hover {
     opacity: 80%;
 }
 
-/*arena/main.hbs*/
+/*arena/main-arena.hbs*/
 
 form.fight-form  {
     display: flex;

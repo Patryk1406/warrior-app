@@ -5,7 +5,7 @@ export const hallOfGloryRouter = Router();
 
 hallOfGloryRouter.get('/', async (req, res) => {
     const warriors = await WarriorRecord.getTopTenWarriors();
-    res.render('hallOfGlory/main', {
+    res.render('hallOfGlory/listOfWarriors', {
         warriors,
     });
 })
